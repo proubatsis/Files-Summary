@@ -15,7 +15,7 @@ let rec get_all_files path = seq {
 }
 
 (* Filter get_all_files to yield only files with the specified extension. *)
-let get_all_files_filtered extensions = get_all_files >> Seq.filter (fun file -> List.exists (fun ext -> ext = (get_file_extension file)) extensions)
+let get_all_files_filtered extensions = get_all_files >> Seq.filter (fun file -> List.exists (fun ext -> ext = (get_file_extension file)) extensions) >> Seq.filter (fun file -> not(file.EndsWith(OUTPUT_FILE)))
 
 (* Create a header to indicate which file is being displayed in OUTPUT_FILE. *)
 let create_header file = (file:string) + NEW_LINE + (String.replicate (file.Length * 2) HEADER_SEPERATOR) + NEW_LINE
